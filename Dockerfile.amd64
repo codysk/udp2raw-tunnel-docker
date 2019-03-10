@@ -4,6 +4,7 @@ MAINTAINER me@iskywind.com
 ADD udp2raw_binaries.tar.gz /home/udp2raw
 COPY entrypoint.sh /home/udp2raw/entrypoint.sh
 RUN { \
+	apk add iptables; \
 	mv /home/udp2raw/udp2raw_amd64_hw_aes /home/udp2raw/udp2raw; \
 	chmod +x /home/udp2raw/udp2raw; \
 	chmod +x /home/udp2raw/entrypoint.sh; \
