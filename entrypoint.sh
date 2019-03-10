@@ -1,3 +1,3 @@
 #!/bin/sh
 
-./udp2raw $CMDLINE_PARAMS
+exec ./udp2raw $CMDLINE_PARAMS
