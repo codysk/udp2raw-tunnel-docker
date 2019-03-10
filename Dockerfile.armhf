@@ -1,0 +1,16 @@
+From alpine:3.7
+MAINTAINER me@iskywind.com
+
+ADD udp2raw_binaries.tar.gz /home/udp2raw
+COPY entrypoint.sh /home/udp2raw/entrypoint.sh
+COPY ./qemu-arm-static /usr/bin/qemu-arm-static
+RUN { \
+	mv /home/udp2raw/udp2raw_arm_asm_aes /home/udp2raw/udp2raw; \
+	chmod +x /home/udp2raw/udp2raw; \
+	chmod +x /home/udp2raw/entrypoint.sh; \
+}
+
+ENV CMDLINE_PARAMS="-c -l 0.0.0.0:1093 -r 127.0.0.1:1094 -k key -a --keep-rule --raw-mode faketcp"
+
+WORKDIR /home/udp2raw
+ENTRYPOINT ["/home/udp2raw/entrypoint.sh"]
